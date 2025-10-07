@@ -1,11 +1,13 @@
 interface Props{
   title:string;
   item?:string[];
+
+  onLabelCliecked: (term: string) => void
 }
 
 
 
- const previousSearches = ({title,item}:Props) => {
+ const previousSearches = ({title,item, onLabelCliecked}:Props) => {
 
  
 
@@ -14,7 +16,8 @@ interface Props{
         <h2> {title} </h2>
         <ul className='previous-searches-list'>
           {item.map((term) => (
-            <li key={term}> {term} </li>
+            <li onClick = {() => onLabelCliecked(term) } key={term}> {term} </li>
+            
           ))}
         </ul>
     </div>
