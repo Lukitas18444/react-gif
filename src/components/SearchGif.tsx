@@ -26,7 +26,8 @@ export default function SearchGif({descripcionBoton, placeholder, onQuery}: Prop
 
 
   const handleSearch = () => {
-    onQuery(query)
+    onQuery(query);
+    setQuery('')
   }
   const handleKeyDown =(event: React.KeyboardEvent<HTMLInputElement>) =>{
       if(event.key === 'Enter'){

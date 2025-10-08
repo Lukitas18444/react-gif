@@ -11,14 +11,27 @@ import { useState } from 'react'
 
 
 export const GifsApp = () => {
-  const [previousTerms, setPreviousTerms] = useState(['dragon ball z']);
+  const [previousTerms, setPreviousTerms] = useState(['']);
+
 
   const handleTermClicked = (term:string) => {
     console.log({term})
   }
 
-  const handleSearch = (query:string) => {
-    console.log({query})
+  const handleSearch = (query:string = '') => {
+    query = query.trim().toLowerCase()
+    if(query.length === 0){
+      return;
+    }
+
+    if(previousTerms.includes(query)){return}
+
+    const currenTerms = previousTerms.slice(0,6);
+    currenTerms.unshift(query)
+    setPreviousTerms( currenTerms )
+
+
+
   }
 
   return (
@@ -27,7 +40,7 @@ export const GifsApp = () => {
     
         <SearchGif descripcionBoton='Buscar' placeholder='Buscar Gifs' onQuery = {handleSearch} />
 
-        <PreviousSearches title='Busquedas previas' item={previousTerms} onLabelCliecked={handleTermClicked} />
+        <PreviousSearches title='Busquedas previas' searches={previousTerms} onLabelCliecked={handleTermClicked} />
         
         <ContainerGif gifs = {mockGifs} />
     
